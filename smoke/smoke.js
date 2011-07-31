@@ -69,7 +69,7 @@ var smoke = {
 
 
 		var buttons = '';
-		if (f.type != 'signal'){
+		if (f.type != 'signal' && f.type != 'blocked'){
 			buttons = '<div class="dialog-buttons">';
 			if (f.type == 'alert'){
 				buttons +=
@@ -235,6 +235,16 @@ var smoke = {
 	},
 	
 	
+        die: function(obj) {
+            if(typeof(obj) != 'object') {
+                return;
+            }
+            
+            if(obj.type && obj.id) {
+                smoke.destroy(obj.type, obj.id);
+            }
+        },
+        
 		
 	destroy: function(type,id){
 		var box = document.getElementById('smoke-out-'+id);
@@ -274,6 +284,17 @@ var smoke = {
 		
 		var id = smoke.newdialog();
 		smoke.build(e,{type:'signal',timeout:f,params:false,newid:id});
+	},
+        
+        blocked: function(e,f){
+                if (typeof(f) != 'object'){
+			f = false;
+		}
+		
+		var id = smoke.newdialog();
+		smoke.build(e,{type:'blocked',params:f,newid:id});
+                
+                return {type: 'blocked', id: id};
 	},
 	
 	confirm: function(e,f,g){

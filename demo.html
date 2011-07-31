@@ -46,7 +46,16 @@
 					smoke.alert('no');
 				}
 			});
-		}		
+		}	
+                
+                function tstblocked(){
+                    var blocked = smoke.blocked("it is an blocked alert, you need to die it!");
+                    // i just put some die here to example with timeout
+                    setTimeout(function() {
+                        // When wants to die, use it:
+                        smoke.die(blocked);
+                    }, 5000);
+                }
 
 	</script>
 
@@ -64,6 +73,7 @@
 			<a onClick="javascript:smoke.signal('this goes away after a sec');">smoke.signal('this goes away after a sec');</a>
 			<a onClick="javascript:tstconfirm();">smoke.confirm('behaves like a normal confirm?');</a>
 			<a onClick="javascript:tstprompt();">smoke.prompt('behaves like a normal prompt?');</a>
+                        <a onClick="javascript:tstblocked();">smoke.blocked('it is an blocked alert, you need to die it!');</a>
 		</div>
 
 
